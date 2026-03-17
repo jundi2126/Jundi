@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Ucapan Digital 1447H</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden; /* Mencegah scroll manual agar transisi terkontrol */
+            background-color: #064e3b;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        section {
+            min-width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #f0fdf4;
+            position: relative;
+            padding: 40px;
+        }
+
+        /* Dekorasi Lentera CSS */
+        .lantern-box {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .lantern {
+            width: 35px;
+            height: 50px;
+            background: #fbbf24;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+            animation: swing 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+        .lantern::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 17px;
+            width: 2px;
+            height: 20px;
+            background: #d97706;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        p { font-size: 1.3rem; opacity: 0.9; }
+
+        /* Tombol Navigasi */
+        .nav-buttons {
+            position: fixed;
+            bottom: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background: #fbbf24;
+            color: #064e3b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        button:hover { background: #f59e0b; transform: scale(1.05); }
+        button:disabled { background: #4b5563; cursor: not-allowed; opacity: 0.5; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <!-- Halaman 1 -->
+        <section>
+            <div class="lantern-box">
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+            </div>
+            <h1>Pesan Khusus</h1>
+            <p>Ada sesuatu untukmu...</p>
+        </section>
+
+        <!-- Halaman 2 -->
+        <section>
+            <div class="lantern-box">
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+            </div>
+            <h1>Selamat Hari Raya <br> Idul Fitri 1447 H</h1>
+            <p>Mohon maaf lahir dan batin</p>
+        </section>
+
+        <!-- Halaman 3 -->
+        <section>
+            <div class="lantern-box">
+                <div class="lantern"></div>
+                <div class="lantern"></div>
+            </div>
+            <h1>✨ Kabar Gembira ✨</h1>
+            <p>Kami menerima segala bentuk THR</p>
+            <div style="font-size: 4rem; margin-top: 20px;">🧧💵</div>
+        </section>
+    </div>
+
+    <div class="nav-buttons">
+        <button id="prevBtn" onclick="moveSlide(-1)" disabled>Kembali</button>
+        <button id="nextBtn" onclick="moveSlide(1)">Lanjut</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const container = document.getElementById('mainContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function moveSlide(direction) {
+            currentSlide += direction;
+            
+            // Geser kontainer
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // Atur status tombol
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === 2;
+            
+            if(currentSlide === 2) {
+                nextBtn.innerText = "Selesai";
+            } else {
+                nextBtn.innerText = "Lanjut";
+            }
+        }
+    </script>
+</body>
+</html>
